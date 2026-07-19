@@ -72,8 +72,24 @@
                             <input type="text" id="alamat" placeholder="e.g. Jl. Raya Diponegoro No. 12, Salatiga, Jawa Tengah">
                         </div>
                         <div class="form-group full">
-                            <label>Foto URL (Opsional)_</label>
-                            <input type="text" id="foto_url" placeholder="Masukkan URL foto dari Cloudinary">
+                            <!-- Nyimpen URL asli dari Cloudinary secara sembunyi-sembunyi -->
+                            <input type="hidden" id="foto_url"> 
+                            
+                            <label>Upload Foto Profil (Opsional)_</label>
+                            
+                            <!-- Input file yang asli disembunyikan -->
+                            <input type="file" id="foto_file" accept="image/*" style="display: none;">
+                            
+                            <!-- Custom UI -->
+                            <div style="display: flex; align-items: center; gap: 15px; border: 1px dashed #FF5500; padding: 15px;">
+                                <label for="foto_file" class="btn-neon" style="margin: 0; padding: 5px 15px; white-space: nowrap; flex-shrink: 0;">
+                                    [ CHOOSE FILE ]
+                                </label>
+                                <span id="file-name-display" style="color: #888; font-family: inherit;">> Awaiting file_</span>
+                            </div>
+                            
+                            <div id="upload-status">> UPLOADING TO CLOUD_ SERVER...</div>
+                            <small style="color: #888; display: block; margin-top: 5px;">> CAUTION: Biarkan kosong jika tidak ingin mengubah foto profil saat ini.</small>
                         </div>
                     </div>
                     <button type="submit" class="btn-neon" id="saveBtn">[ UPLOAD DATA ]</button>
