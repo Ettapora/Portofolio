@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadPublicData() {
     try {
-        const response = await fetch('http://localhost:5000/api/portfolio');
+        const response = await fetch('/api/portfolio');
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         
         const res = await response.json();

@@ -1,5 +1,5 @@
 // Konfigurasi dasar URL Backend Flask lu
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '';
 
 const api = {
     // Fungsi untuk ngambil, nyimpen, dan hapus token dari LocalStorage browser
