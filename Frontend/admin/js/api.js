@@ -1,5 +1,5 @@
 // Konfigurasi dasar URL Backend Flask lu
-const API_URL = '[https://portofolio-production-7752.up.railway.app/api](https://portofolio-production-7752.up.railway.app/api)';
+const API_URL = '/api';
 
 const api = {
     // Fungsi untuk ngambil, nyimpen, dan hapus token dari LocalStorage browser
