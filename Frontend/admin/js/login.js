@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Tembak endpoint login di backend Flask lu
-                const response = await api.fetch('/api/login', {
+                const response = await api.fetch('/login', {
                     method: 'POST',
                     body: JSON.stringify({ username, password })
                 });
