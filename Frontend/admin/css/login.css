@@ -67,7 +67,7 @@
             display: block;
             text-align: center;
             margin-top: 1.5rem;
-            color: #888888; /* Warna abu-abu redup */
+            color: #888888;
             text-decoration: none;
             font-size: 0.9rem;
             letter-spacing: 2px;
@@ -75,7 +75,7 @@
         }
 
         .btn-return:hover {
-            color: #FF5500; /* Warna neon oranye lu */
+            color: #FF5500;
             text-shadow: 0 0 8px rgba(255, 85, 0, 0.6);
         }
         #error-msg { color: #ef4444; text-align: center; margin-bottom: 15px; font-size: 14px; display: none; }
