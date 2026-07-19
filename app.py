@@ -58,9 +58,20 @@ def create_app():
         else:
             return "Error: index.html not found", 404
     
-    @app.route('/admin/<path:filename>')
-    def admin_pages(filename):
-        return send_from_directory(os.path.join(app.root_path, 'Frontend', 'admin'), filename)
+    # Ini bakal otomatis ngerespon rute kayak /login, /dashboard, /projects, dll
+    @app.route('/<page>')
+    def serve_admin_page(page):
+        # Mencegah akses ke file yang bukan .html
+        if not page.endswith('.html'):
+            page += '.html'
+            
+        # Cek apakah file ada di folder admin
+        path_to_file = os.path.join(app.root_path, 'Frontend', 'admin', page)
+        if os.path.exists(path_to_file):
+            return send_from_directory(os.path.join(app.root_path, 'Frontend', 'admin'), page)
+        
+        # Kalau nggak ketemu, lempar ke 404 handler
+        return "Page not found", 404
     
     @app.route('/profil/<path:filename>')
     def profil_pages(filename):
