@@ -1,10 +1,8 @@
-import mysql.connector
 from mysql.connector import pooling
 from config import Config
 import time
 import logging
 
-# Konfigurasi logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOT // DASHBOARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">sys_admin/</div>
+        <a href="dashboard.html" class="active"><i class="fas fa-terminal"></i> Status</a>
+        <a href="profiles.html"><i class="fas fa-user-secret"></i> Identity</a>
+        <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+        <a href="experience.html"><i class="fas fa-network-wired"></i> Logs</a>
+        <a href="projects.html"><i class="fas fa-folder-open"></i> Projects</a>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2>> _ Status Overview</h2>
+            <div>
+                <span id="admin-name" style="margin-right: 15px; color: #888;">Fetching...</span>
+                <button onclick="handleLogout()" class="logout-btn">[ LOGOUT ]</button>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Projects</h3>
+                    <div class="value" id="stat-projects">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Skills</h3>
+                    <div class="value" id="stat-skills">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Experiences</h3>
+                    <div class="value" id="stat-experiences">0</div>
+                </div>
+            </div>
+
+            <div class="activity-section">
+                <h3>> Recent System Activity</h3>
+                <ul class="activity-list" id="recent-activity">
+                    <li><span class="type">Loading logs...</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script> 
+</body>
+</html>

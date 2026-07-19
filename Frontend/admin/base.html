@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOT // DASHBOARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">sys_admin/</div>
+        <a href="dashboard.html" id="nav-dashboard"><i class="fas fa-terminal"></i> Status</a>
+        <a href="profiles.html" id="nav-profile"><i class="fas fa-user-secret"></i> Identity</a>
+        <a href="skills.html" id="nav-skills"><i class="fas fa-code"></i> Skills</a>
+        <a href="experience.html" id="nav-experience"><i class="fas fa-network-wired"></i> Logs</a>
+        <a href="projects.html" id="nav-projects"><i class="fas fa-folder-open"></i> Projects</a>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2 id="page-title">> _ </h2>
+            <div>
+                <span id="admin-name" style="margin-right: 15px; color: #888;">Fetching...</span>
+                <button onclick="handleLogout()" class="logout-btn">[ LOGOUT ]</button>
+            </div>
+        </div>
+        
+        <div class="content-area" id="admin-content">
+            <!-- Konten JS akan disuntikkan ke sini -->
+        </div>
+    </div>
+
+    <div class="modal-confirm" id="sysConfirmModal">
+        <div class="confirm-box">
+            <h3>> _ SYSTEM WARNING</h3>
+            <p id="sysConfirmMsg">Are you sure you want to execute this action?</p>
+            <div class="confirm-actions">
+                <button class="btn-neon-safe" id="sysConfirmCancel">[ ABORT ]</button>
+                <button class="btn-neon-danger" id="sysConfirmOk">[ DESTROY ]</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/base.js"></script>
+</body>
+</html>

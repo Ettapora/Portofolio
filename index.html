@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portofolio - Raihan Agil Maulana</title>
+    <title>Portofolio - Yesaya Ranu Wirasenjaya</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="Frontend/utama/css/style.css" /> 
@@ -11,14 +11,14 @@
   <body>
     <!-- Navbar -->
     <nav id="navbar">
-      <a href="Frontend/admin/login.html" class="logo">Agil.</a>
+      <a href="Frontend/admin/login.html" class="logo">[ YRW_025 ]</a>
       <ul id="navMenu">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#home" class="nav-link active">[ Home ]</a></li>
+        <li><a href="#about" class="nav-link">[ About ]</a></li>
+        <li><a href="#skills" class="nav-link">[ Skills ]</a></li>
+        <li><a href="#experience" class="nav-link">[ Experience ]</a></li>
+        <li><a href="#projects" class="nav-link">[ Projects ]</a></li>
+        <li><a href="#contact" class="nav-link">[ Contact ]</a></li>
       </ul>
       <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
     </nav>
@@ -26,13 +26,13 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-content" id="hero-content">
-        <div class="loading-skeleton">Memuat profil...</div>
+        <div class="loading-skeleton">Loading profile...</div>
       </div>
     </section>
-
+  <div class="hazard-divider"></div>
     <!-- About Section -->
     <section id="about">
-      <h2 class="section-title">Tentang Saya</h2>
+      <h2 class="section-title">// ABOUT_ME</h2>
       <div class="about-content">
         <div class="about-img">
           <img id="profile-photo" src="" alt="Foto Profil" style="display:none; width:100%; border-radius:50%;" />
@@ -43,47 +43,58 @@
         </div>
       </div>
     </section>
-
+  <div class="hazard-divider"></div>
     <!-- Skills Section -->
     <section id="skills" class="bg-white">
-      <h2 class="section-title">Keahlian</h2>
+      <h2 class="section-title">// SKILLS</h2>
       <div class="skills-grid" id="skills-container">
         <!-- Diisi oleh JS -->
       </div>
     </section>
-
+  <div class="hazard-divider"></div>
     <!-- Experience Section -->
     <section id="experience">
-      <h2 class="section-title">Pengalaman</h2>
+      <h2 class="section-title">// EXPERIENCES</h2>
       <div class="timeline" id="experience-container">
         <!-- Diisi oleh JS -->
       </div>
     </section>
-
-    <!-- Projects Section (STRUKTUR BARU UNTUK OVERLAY) -->
+  <div class="hazard-divider"></div>
+    <!-- Projects Section -->
     <section id="projects" class="bg-white">
-      <h2 class="section-title">Proyek Saya</h2>
+      <h2 class="section-title">// PROJECT_ARCHIVES</h2>
       <div class="projects-grid" id="projects-container">
         <!-- Template Project Card akan di-render di sini oleh JS -->
       </div>
     </section>
-
+  <div class="hazard-divider"></div>
     <!-- Contact Section -->
     <section id="contact">
-      <h2 class="section-title">Hubungi Saya</h2>
+      <h2 class="section-title">// NETWORK</h2>
       <div class="contact-container">
-        <p id="contact-email-display">Email akan dimuat dari database...</p>
+        <p id="contact-email-display">Email will be loaded from the database...</p>
         <form class="contact-form" id="contactForm">
-          <input type="text" id="contactName" placeholder="Nama Anda" required />
-          <input type="email" id="contactEmail" placeholder="Email Anda" required />
-          <textarea id="contactMessage" placeholder="Pesan Anda" required></textarea>
-          <button type="submit" class="btn" id="sendBtn">Kirim Pesan</button>
+          <input type="text" id="contactName" placeholder="Your Name" required />
+          <input type="email" id="contactEmail" placeholder="Your Email" required />
+          <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn" id="sendBtn">[ COMMIT: SEND ]</button>
         </form>
       </div>
     </section>
 
+    <!-- Global Alert Modal (Cyberpunk Style) -->
+    <div class="modal-alert" id="sysAlertModal">
+        <div class="alert-box">
+            <h3 id="sysAlertTitle">> _ SYSTEM MESSAGE</h3>
+            <p id="sysAlertMsg">Message sent successfully.</p>
+            <div class="alert-actions">
+                <button class="btn-neon" id="sysAlertOk">[ ACKNOWLEDGE ]</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
-      <p>&copy; <span id="current-year"></span> Raihan Agil Maulana. All Rights Reserved.</p>
+      <p>&copy; <span id="current-year"></span> Yesaya Ranu Wirasenjaya. All Rights Reserved.</p>
     </footer>
 
     <!-- Load API Config & Main Script -->

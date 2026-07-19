@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOT // LOGS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">sys_admin/</div>
+        <a href="dashboard.html"><i class="fas fa-terminal"></i> Status</a>
+        <a href="profiles.html"><i class="fas fa-user-secret"></i> Identity</a>
+        <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+        <a href="experience.html" class="active"><i class="fas fa-network-wired"></i> Logs</a>
+        <a href="projects.html"><i class="fas fa-folder-open"></i> Projects</a>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2>> _ Experience Logs</h2>
+            <button onclick="handleLogout()" class="logout-btn">[ LOGOUT ]</button>
+        </div>
+        
+        <div class="content-area">
+            <div class="header-action">
+                <p style="color: #888;">Record your career and academic timeline.</p>
+                <button class="btn-neon" onclick="openModal()">[+ ADD LOG ]</button>
+            </div>
+            
+            <table class="cyber-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Posisi</th>
+                        <th>Perusahaan/Institusi</th>
+                        <th>Durasi</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="exp-tbody">
+                    <tr><td colspan="5" style="text-align: center;">Fetching logs...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="expModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">> _ Add Experience</h3>
+            <form id="expForm">
+                <input type="hidden" id="expId">
+                <div class="form-group">
+                    <label>Posisi_</label>
+                    <input type="text" id="posisi" placeholder="e.g. Panitia ..." required>
+                </div>
+                <div class="form-group">
+                    <label>Perusahaan/Institusi_</label>
+                    <input type="text" id="perusahaan" placeholder="e.g. Universitas ..." required>
+                </div>
+                <div class="form-group">
+                    <label>Durasi_</label>
+                    <input type="text" id="durasi" placeholder="e.g. Jun 2025 - ..." required>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi_</label>
+                    <textarea id="deskripsi" rows="3" placeholder="Saya melakukan ... untuk ..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-neon btn-danger" onclick="closeModal()">[ CANCEL ]</button>
+                    <button type="submit" class="btn-neon" id="saveBtn">[ EXECUTE ]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-confirm" id="sysConfirmModal">
+        <div class="confirm-box">
+            <h3>> _ SYSTEM WARNING</h3>
+            <p id="sysConfirmMsg">Are you sure you want to execute this action?</p>
+            <div class="confirm-actions">
+                <button class="btn-neon-safe" id="sysConfirmCancel">[ ABORT ]</button>
+                <button class="btn-neon-danger" id="sysConfirmOk">[ DESTROY ]</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/experience.js"></script> 
+</body>
+</html>

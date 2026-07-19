@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
+    // Scroll Spy buat Navbar
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            }
+        });
+    });
+
     // Load Data Utama
     await loadPublicData();
 
@@ -19,22 +40,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadPublicData() {
     try {
-        // Menggunakan endpoint /api/main-profile
-        const response = await fetch('/api/main-profile');
+        const response = await fetch('http://localhost:5000/api/portfolio');
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         
         const res = await response.json();
         
         if (!res.success || !res.data) {
-            showError('Data profil belum tersedia.');
+            showError('No data available.');
             return;
         }
 
-        const { skills, experiences, projects } = res.data;
-        const profile = res.data;
+        const { profile, skills, experiences, projects } = res.data;
 
-        if (!profile.nama_lengkap) {
-            showError('Nama profil kosong.');
+        if (!profile || !profile.nama_lengkap) {
+            showError('No profile data available.');
             return;
         }
 
@@ -47,7 +66,7 @@ async function loadPublicData() {
 
     } catch (error) {
         console.error('Fetch Error:', error);
-        showError('Gagal terhubung ke server.');
+        showError('Failed to fetch data.');
     }
 }
 
@@ -62,11 +81,16 @@ function renderHero(p) {
     const hero = document.getElementById('hero-content');
     if (!hero) return;
 
+    // Pakai struktur HTML khusus untuk gaya terminal
     hero.innerHTML = `
-        <h4>Selamat Datang di Portofolio Saya</h4>
-        <h1>Halo, Saya <span>${escapeHtml(p.nama_lengkap)}</span></h1>
-        <p>${escapeHtml(p.prodi || 'Mahasiswa')} - ${escapeHtml(p.universitas || 'Universitas')}</p>
-        <a href="#projects" class="btn">Lihat Proyek Saya</a>
+        <div class="terminal-box">
+            <h4 class="cmd-prompt"><span class="neon-text">$</span> whoami</h4>
+            <h1>${escapeHtml(p.nama_lengkap)}</h1>
+            <div class="typewriter">
+                <p>>_ Backend Developer & Database Enthusiast.</p>
+            </div>
+            <a href="#projects" class="btn-neon">[ EXECUTE: VIEW_PROJECTS ]</a>
+        </div>
     `;
 }
 
@@ -88,12 +112,13 @@ function renderAbout(p) {
     const aboutText = document.getElementById('about-text');
     if (aboutText) {
         aboutText.innerHTML = `
-            <h3>${escapeHtml(p.nama_lengkap)} - ${escapeHtml(p.prodi)}</h3>
-            <p>Mahasiswa di ${escapeHtml(p.universitas)}, Fakultas ${escapeHtml(p.fakultas)}. 
-               Saat ini berada di semester ${escapeHtml(p.semester)}.</p>
-            <p>Berdomisili di ${escapeHtml(p.alamat)}. Memiliki ketertarikan besar dalam pengembangan backend, 
-               manajemen database, dan arsitektur aplikasi web.</p>
-            <a href="#contact" class="btn">Hubungi Saya</a>
+            <h3>[ IDENTITY_VERIFIED ] : ${escapeHtml(p.nama_lengkap)}</h3>
+            
+            <p>Saya adalah mahasiswa semester ${escapeHtml(p.semester)} di program studi ${escapeHtml(p.prodi)}, ${escapeHtml(p.fakultas)} - ${escapeHtml(p.universitas)}.</p>
+            
+            <p>Saat ini beroperasi dari ${escapeHtml(p.alamat)}.</p>
+            
+            <a href="#contact" class="btn-neon">[ INITIATE_CONTACT ]</a>
         `;
     }
 }
@@ -103,7 +128,7 @@ function renderSkills(skills) {
     if (!container) return;
 
     if (!skills.length) {
-        container.innerHTML = '<p class="empty-state">Belum ada data skill.</p>';
+        container.innerHTML = '<p class="empty-state">No skill data available.</p>';
         return;
     }
     
@@ -120,7 +145,7 @@ function renderExperiences(exps) {
     if (!container) return;
 
     if (!exps.length) {
-        container.innerHTML = '<p class="empty-state">Belum ada pengalaman.</p>';
+        container.innerHTML = '<p class="empty-state">No experience data available.</p>';
         return;
     }
 
@@ -142,11 +167,10 @@ function renderProjects(projs) {
     if (!container) return;
 
     if (!projs.length) {
-        container.innerHTML = '<p class="empty-state">Belum ada proyek.</p>';
+        container.innerHTML = '<p class="empty-state">No project data available.</p>';
         return;
     }
 
-    // PERBAIKAN STRUKTUR HTML AGAR COCOK DENGAN CSS OVERLAY
     container.innerHTML = projs.map(p => `
         <div class="project-card">
             <div class="project-img-wrapper">
@@ -172,7 +196,7 @@ function renderProjects(projs) {
 function renderContact(p) {
     const emailDisplay = document.getElementById('contact-email-display');
     if (emailDisplay && p.email) {
-        emailDisplay.innerHTML = `Tertarik berkolaborasi? Kirim pesan ke <strong>${escapeHtml(p.email)}</strong>`;
+        emailDisplay.innerHTML = `> CONNECTION ESTABLISHED. Siap untuk berdiskusi atau sekadar bertukar pikiran? Ping server saya melalui form di bawah atau secara langsung melalui node <strong>${escapeHtml(p.email)}</strong>.`;
     }
 }
 
@@ -187,35 +211,73 @@ function setupContactForm() {
         const originalText = btn.textContent;
         
         btn.disabled = true;
-        btn.textContent = 'Mengirim...';
+        btn.textContent = 'Sending...';
         
         try {
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: document.getElementById('contactName').value,
+                    // Ini yang lu benerin kemaren
+                    nama: document.getElementById('contactName').value,
                     email: document.getElementById('contactEmail').value,
-                    message: document.getElementById('contactMessage').value
+                    pesan: document.getElementById('contactMessage').value
                 })
             });
             
             const result = await response.json();
             
             if (response.ok) {
-                alert('✅ ' + result.message);
+                // Ganti alert bawaan jadi cyberAlert
+                await window.cyberAlert('TRANSMISSION_SUCCESS', result.message);
                 contactForm.reset();
             } else {
-                alert('❌ ' + (result.error || 'Gagal mengirim'));
+                // Ganti alert bawaan jadi cyberAlert
+                await window.cyberAlert('TRANSMISSION_FAILED', result.error || 'Failed to send message.');
             }
         } catch (error) {
-            alert('❌ Terjadi kesalahan jaringan.');
+            // Ganti alert bawaan jadi cyberAlert
+            await window.cyberAlert('SYSTEM_ERROR', 'An error occurred while sending the message.');
         } finally {
             btn.disabled = false;
             btn.textContent = originalText;
         }
     });
 }
+
+// Custom Alert Box
+window.cyberAlert = function(title, message) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('sysAlertModal');
+        const titleEl = document.getElementById('sysAlertTitle');
+        const msgEl = document.getElementById('sysAlertMsg');
+        const btnOk = document.getElementById('sysAlertOk');
+
+        if (!modal) {
+            // Fallback aman kalau lu lupa pasang HTML-nya
+            alert(title + ": " + message);
+            resolve();
+            return;
+        }
+
+        // Set pesan dan judul
+        titleEl.textContent = '> _ ' + title;
+        msgEl.textContent = message;
+        
+        // Tampilkan modal
+        modal.classList.add('active');
+
+        // Bersihkan listener biar ga numpuk
+        const cleanup = () => {
+            modal.classList.remove('active');
+            btnOk.replaceWith(btnOk.cloneNode(true));
+            resolve();
+        };
+
+        // Pasang event ke tombol OK
+        document.getElementById('sysAlertOk').addEventListener('click', cleanup);
+    });
+};
 
 function escapeHtml(text) {
     if (text === null || text === undefined) return '';
